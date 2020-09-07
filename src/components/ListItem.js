@@ -1,10 +1,18 @@
 import React from 'react';
-import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, Text, TouchableOpacity, LayoutAnimation, Platform, UIManager} from 'react-native';
 import {CardSection} from './common';
 import {connect} from 'react-redux';
 import * as actions from '../actions';
 
 function ListItem({title, description, id, selectLibrary, selectedLibrary}) {
+  if (
+    Platform.OS === "android" &&
+    UIManager.setLayoutAnimationEnabledExperimental
+  ) {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+  }
+
+  LayoutAnimation.spring();
   return (
     <TouchableOpacity
       onPress={ () => selectLibrary(id) }
